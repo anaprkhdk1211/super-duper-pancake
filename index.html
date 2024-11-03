@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gap Fill Exercise</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            text-align: left;
+        }
+        .gap {
+            width: 100px;
+            padding: 5px;
+        }
+        .correct {
+            background-color: lightgreen;
+        }
+        .incorrect {
+            background-color: lightcoral;
+        }
+        .feedback {
+            font-weight: bold;
+        }
+        .tick {
+            color: green;
+            font-size: 20px;
+        }
+        .cross {
+            color: red;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Complete the sentences with the correct words.</h2>
+        <ol>
+            <li>
+                The film was really dull and lasted over four hours. I was bored out of my 
+                <input type="text" class="gap" id="gap1" onkeyup="checkAnswer(event, 1)"> 
+                <span id="feedback1" class="feedback"></span>
+            </li>
+            <li>
+                The play was OK, but not half as good as all the critics had claimed. It didn’t live up to all the 
+                <input type="text" class="gap" id="gap2" onkeyup="checkAnswer(event, 2)"> 
+                <span id="feedback2" class="feedback"></span>
+            </li>
+            <li>
+                Clara was so upset when the heroine died near the end of the film that she burst into 
+                <input type="text" class="gap" id="gap3" onkeyup="checkAnswer(event, 3)">, and couldn’t stop crying. 
+                <span id="feedback3" class="feedback"></span>
+            </li>
+            <li>
+                The comedian was so funny that we were all on the floor in 
+                <input type="text" class="gap" id="gap4" onkeyup="checkAnswer(event, 4)">. We couldn’t stop laughing. 
+                <span id="feedback4" class="feedback"></span>
+            </li>
+            <li>
+                I have never felt so embarrassed in public. I didn’t want to be there. I wanted the ground to open up and 
+                <input type="text" class="gap" id="gap5" onkeyup="checkAnswer(event, 5)"> me. 
+                <span id="feedback5" class="feedback"></span>
+            </li>
+            <li>
+                Henry was so young when he died. At his funeral, his friends and family were inconsolable. They were in 
+                <input type="text" class="gap" id="gap6" onkeyup="checkAnswer(event, 6)"> of tears. 
+                <span id="feedback6" class="feedback"></span>
+            </li>
+            <li>
+                Her outrageous behaviour at the party caused a bit of a 
+                <input type="text" class="gap" id="gap7" onkeyup="checkAnswer(event, 7)">. Everybody there was shocked. 
+                <span id="feedback7" class="feedback"></span>
+            </li>
+            <li>
+                Graham is so 
+                <input type="text" class="gap" id="gap8" onkeyup="checkAnswer(event, 8)"> of himself that he thinks everything he says is really interesting, and, believe me, it isn’t! 
+                <span id="feedback8" class="feedback"></span>
+            </li>
+        </ol>
+        <div id="result"></div>
+    </div>
+    <script>
+        const correctAnswers = ["mind", "hype", "tears", "stitches", "swallow", "floods", "scene", "full"];
+        let score = 0;
+
+        function checkAnswer(event, index) {
+            const input = document.getElementById(`gap${index}`);
+            const feedback = document.getElementById(`feedback${index}`);
+            const userAnswer = input.value.trim().toLowerCase();
+            if (userAnswer === correctAnswers[index - 1]) {
+                input.classList.add("correct");
+                input.classList.remove("incorrect");
+                feedback.innerHTML = "&#10003;"; // Tick mark
+                feedback.classList.add("tick");
+                feedback.classList.remove("cross");
+                score++;
+            } else {
+                input.classList.add("incorrect");
+                input.classList.remove("correct");
+                feedback.innerHTML = "&#10007;"; // Cross mark
+                feedback.classList.add("cross");
+                feedback.classList.remove("tick");
+            }
+            calculateResult();
+        }
+
+        function calculateResult() {
+            const total = correctAnswers.length;
+            const percentage = Math.round((score / total) * 100);
+            document.getElementById("result").innerText = `Your score: ${score}/${total} (${percentage}%)`;
+        }
+    </script>
+</body>
+</html>
